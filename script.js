@@ -31,10 +31,11 @@ function initWalletConnection() {
                         alert('✅ Wallet connected!\n' + publicKey.substring(0, 8) + '...');
                         
                     } catch (err) {
-                        alert('❌ Failed to connect wallet');
+                        console.error('Wallet connection error:', err);
+                        alert('❌ Failed to connect wallet. Please try again.');
                     }
                 } else {
-                    if (confirm('Phantom wallet not detected!\n\nInstall it?')) {
+                    if (confirm('Phantom wallet not detected!\n\nWould you like to install it?')) {
                         window.open('https://phantom.app/', '_blank');
                     }
                 }
@@ -43,7 +44,7 @@ function initWalletConnection() {
     });
 }
 
-// Waitlist Form
+// Waitlist Form with Formspree
 function initWaitlistForm() {
     const form = document.getElementById('waitlistForm');
     const emailInput = document.getElementById('emailInput');
@@ -55,44 +56,56 @@ function initWaitlistForm() {
             
             const email = emailInput.value.trim();
             
+            // Validate email
             if (!isValidEmail(email)) {
-                alert('❌ Please enter a valid email');
+                alert('❌ Please enter a valid email address');
                 return;
             }
             
+            // Get connected wallet address (if any)
             const wallet = window.solana?.publicKey?.toString() || 'Not connected';
+            
+            // Disable submit button
             const submitButton = form.querySelector('button[type="submit"]');
             const originalText = submitButton.textContent;
-            
             submitButton.disabled = true;
             submitButton.textContent = 'Joining...';
             
             try {
-                // Using GET with URL parameters (works with Google Sheets)
-                const params = new URLSearchParams({
-                    email: email,
-                    wallet: wallet
+                // Send to Formspree
+                const response = await fetch('https://formspree.io/f/mvgwvayo', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        wallet: wallet,
+                        timestamp: new Date().toISOString()
+                    })
                 });
-                
-                await fetch(`https://script.google.com/macros/s/AKfycbxOgkeunlE5dA1XrWq2U5VyNNQCtH7FkjXhO1UPiJbbpkT_FBQSQyeGRGJ4rDkRGKzdOw/exec?${params}`, {
-                    method: 'GET',
-                    redirect: 'follow'
-                });
-                
-                emailInput.value = '';
-                form.style.display = 'none';
-                successMessage.style.display = 'block';
-                
-                alert('🎉 Successfully joined the waitlist!');
-                
-                setTimeout(() => {
-                    form.style.display = 'flex';
-                    successMessage.style.display = 'none';
-                    submitButton.disabled = false;
-                    submitButton.textContent = originalText;
-                }, 3000);
+
+                if (response.ok) {
+                    // Success!
+                    emailInput.value = '';
+                    form.style.display = 'none';
+                    successMessage.style.display = 'block';
+                    
+                    alert('🎉 Successfully joined the waitlist!\n\nWe\'ll notify you when Mirror Sync launches!');
+                    
+                    // Reset form after 3 seconds
+                    setTimeout(() => {
+                        form.style.display = 'flex';
+                        successMessage.style.display = 'none';
+                        submitButton.disabled = false;
+                        submitButton.textContent = originalText;
+                    }, 3000);
+                } else {
+                    throw new Error('Form submission failed');
+                }
                 
             } catch (error) {
+                console.error('Error submitting form:', error);
                 alert('❌ Something went wrong. Please try again!');
                 submitButton.disabled = false;
                 submitButton.textContent = originalText;
@@ -101,8 +114,10 @@ function initWaitlistForm() {
     }
 }
 
+// Email validation
 function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
 }
 
 // Load Top Traders
@@ -181,11 +196,12 @@ function loadTopTraders() {
     });
 }
 
+// Mirror trader action
 function mirrorTrader(wallet, name) {
     if (window.solana && window.solana.isConnected) {
-        alert(`🎯 You've chosen to mirror ${name}\n\nWallet: ${wallet}\n\n✨ This feature will be available in beta!`);
+        alert(`🎯 You've chosen to mirror ${name}\n\nWallet: ${wallet}\n\n✨ This feature will be available in the beta launch!\n\nYou'll be notified when it's ready.`);
     } else {
-        if (confirm('⚠️ Please connect your Phantom wallet first!\n\nConnect now?')) {
+        if (confirm('⚠️ Please connect your Phantom wallet first!\n\nWould you like to connect now?')) {
             document.getElementById('connectWallet')?.click();
         }
     }
@@ -198,10 +214,16 @@ function initSmoothScroll() {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
             }
         });
     });
 }
 
-console.log('🔄 Mirror Sync loaded successfully!');
+// Console message
+console.log('%c🔄 Mirror Sync', 'font-size: 24px; font-weight: bold; color: #667eea;');
+console.log('%cGrow Together, Rich Together 💎', 'font-size: 14px; color: #764ba2;');
+console.log('%cWebsite loaded successfully!', 'color: #00D084;');
