@@ -72,8 +72,8 @@ function initWaitlistForm() {
             submitButton.textContent = 'Joining...';
             
             try {
-                // Send to Formspree
-                const response = await fetch('https://formspree.io/f/mvgwvayo', {
+                // Send to Formspree - UPDATED URL
+                const response = await fetch('https://formspree.io/f/xqaygqjy', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -81,7 +81,8 @@ function initWaitlistForm() {
                     body: JSON.stringify({
                         email: email,
                         wallet: wallet,
-                        timestamp: new Date().toISOString()
+                        timestamp: new Date().toISOString(),
+                        source: 'Mirror Sync Landing Page'
                     })
                 });
 
