@@ -44,7 +44,7 @@ function initWalletConnection() {
     });
 }
 
-// Waitlist Form with Web3Forms
+// Waitlist Form - SIMPLIFIED VERSION
 function initWaitlistForm() {
     const form = document.getElementById('waitlistForm');
     const emailInput = document.getElementById('emailInput');
@@ -62,25 +62,23 @@ function initWaitlistForm() {
                 return;
             }
             
-            // Get connected wallet address (if any)
+            // Get wallet
             const wallet = window.solana?.publicKey?.toString() || 'Not connected';
             
-            // Disable submit button
+            // Disable button
             const submitButton = form.querySelector('button[type="submit"]');
             const originalText = submitButton.textContent;
             submitButton.disabled = true;
             submitButton.textContent = 'Joining...';
             
             try {
-                // Prepare form data for Web3Forms
+                // Create FormData
                 const formData = new FormData();
                 formData.append('access_key', '2nhxxeg38raxt6');
-                formData.append('subject', 'New Mirror Sync Waitlist Signup');
-                formData.append('from_name', 'Mirror Sync Landing');
                 formData.append('email', email);
                 formData.append('wallet', wallet);
-                formData.append('timestamp', new Date().toLocaleString());
-                formData.append('source', 'Mirror Sync Waitlist Form');
+                formData.append('name', 'Mirror Sync User');
+                formData.append('message', `New waitlist signup!\n\nEmail: ${email}\nWallet: ${wallet}\nTimestamp: ${new Date().toLocaleString()}`);
                 
                 // Send to Web3Forms
                 const response = await fetch('https://api.web3forms.com/submit', {
@@ -88,17 +86,18 @@ function initWaitlistForm() {
                     body: formData
                 });
 
-                const data = await response.json();
+                const result = await response.json();
+                
+                console.log('Web3Forms Response:', result);
 
-                if (data.success) {
+                if (result.success) {
                     // Success!
                     emailInput.value = '';
                     form.style.display = 'none';
                     successMessage.style.display = 'block';
+                    alert('🎉 Successfully joined the waitlist!\n\nCheck your email for confirmation!');
                     
-                    alert('🎉 Successfully joined the waitlist!\n\nWe\'ll notify you when Mirror Sync launches!');
-                    
-                    // Reset form after 3 seconds
+                    // Reset after 3 seconds
                     setTimeout(() => {
                         form.style.display = 'flex';
                         successMessage.style.display = 'none';
@@ -106,12 +105,17 @@ function initWaitlistForm() {
                         submitButton.textContent = originalText;
                     }, 3000);
                 } else {
-                    throw new Error(data.message || 'Form submission failed');
+                    // Error from Web3Forms
+                    console.error('Web3Forms Error:', result);
+                    alert('❌ Error: ' + (result.message || 'Something went wrong. Please try again.'));
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalText;
                 }
                 
             } catch (error) {
-                console.error('Error submitting form:', error);
-                alert('❌ Something went wrong. Please try again!');
+                // Network error
+                console.error('Network Error:', error);
+                alert('❌ Network error. Please check your connection and try again.');
                 submitButton.disabled = false;
                 submitButton.textContent = originalText;
             }
@@ -228,7 +232,8 @@ function initSmoothScroll() {
     });
 }
 
-// Console message
+// Console messages
 console.log('%c🔄 Mirror Sync', 'font-size: 24px; font-weight: bold; color: #667eea;');
 console.log('%cGrow Together, Rich Together 💎', 'font-size: 14px; color: #764ba2;');
 console.log('%cWebsite loaded successfully!', 'color: #00D084;');
+console.log('%cWeb3Forms Access Key: 2nhxxeg38raxt6', 'color: #888;');
