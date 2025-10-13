@@ -44,7 +44,7 @@ function initWalletConnection() {
     });
 }
 
-// Waitlist Form with Formspree
+// Waitlist Form with Web3Forms
 function initWaitlistForm() {
     const form = document.getElementById('waitlistForm');
     const emailInput = document.getElementById('emailInput');
@@ -72,21 +72,25 @@ function initWaitlistForm() {
             submitButton.textContent = 'Joining...';
             
             try {
-                // Send to Formspree - UPDATED URL
-                const response = await fetch('https://formspree.io/f/xqaygqjy', {
+                // Prepare form data for Web3Forms
+                const formData = new FormData();
+                formData.append('access_key', '2nhxxeg38raxt6');
+                formData.append('subject', 'New Mirror Sync Waitlist Signup');
+                formData.append('from_name', 'Mirror Sync Landing');
+                formData.append('email', email);
+                formData.append('wallet', wallet);
+                formData.append('timestamp', new Date().toLocaleString());
+                formData.append('source', 'Mirror Sync Waitlist Form');
+                
+                // Send to Web3Forms
+                const response = await fetch('https://api.web3forms.com/submit', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        email: email,
-                        wallet: wallet,
-                        timestamp: new Date().toISOString(),
-                        source: 'Mirror Sync Landing Page'
-                    })
+                    body: formData
                 });
 
-                if (response.ok) {
+                const data = await response.json();
+
+                if (data.success) {
                     // Success!
                     emailInput.value = '';
                     form.style.display = 'none';
@@ -102,7 +106,7 @@ function initWaitlistForm() {
                         submitButton.textContent = originalText;
                     }, 3000);
                 } else {
-                    throw new Error('Form submission failed');
+                    throw new Error(data.message || 'Form submission failed');
                 }
                 
             } catch (error) {
