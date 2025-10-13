@@ -3,1066 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mirror Sync - The first Solana-native decentralized copy trading platform. Grow Together, Rich Together.">
-    <title>Mirror Sync - Grow Together, Rich Together | Solana Copy Trading</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #14F195;
-            --primary-dark: #00D98B;
-            --secondary: #9945FF;
-            --accent: #00D4FF;
-            --dark: #0a0a0f;
-            --dark-2: #111118;
-            --dark-3: #1a1a24;
-            --gray: #6b6b7d;
-            --gray-light: #9999a8;
-            --white: #ffffff;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--dark);
-            color: var(--white);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(10, 10, 15, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            z-index: 1000;
-            padding: 1rem 0;
-        }
-        
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 2rem;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--white);
-        }
-        
-        .logo-icon {
-            font-size: 2rem;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-        
-        .nav-links a {
-            color: var(--gray-light);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-        
-        .nav-actions {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        /* Buttons */
-        .btn-primary, .btn-secondary {
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.95rem;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: var(--dark);
-            box-shadow: 0 4px 16px rgba(20, 241, 149, 0.3);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(20, 241, 149, 0.4);
-        }
-        
-        .btn-secondary {
-            background: var(--dark-3);
-            color: var(--white);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .btn-secondary:hover {
-            background: var(--dark-2);
-            border-color: var(--primary);
-        }
-        
-        .btn-large {
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-        }
-        
-        /* Hero Section */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: calc(80px + 4rem) 0 4rem;
-            overflow: hidden;
-        }
-        
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 0;
-        }
-        
-        .gradient-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.3;
-            animation: float 20s ease-in-out infinite;
-        }
-        
-        .orb-1 {
-            width: 500px;
-            height: 500px;
-            background: var(--primary);
-            top: -250px;
-            right: -100px;
-        }
-        
-        .orb-2 {
-            width: 400px;
-            height: 400px;
-            background: var(--secondary);
-            bottom: -200px;
-            left: -100px;
-            animation-delay: -7s;
-        }
-        
-        .orb-3 {
-            width: 300px;
-            height: 300px;
-            background: var(--accent);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation-delay: -14s;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0); }
-            33% { transform: translate(30px, -30px); }
-            66% { transform: translate(-20px, 20px); }
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: rgba(20, 241, 149, 0.1);
-            border: 1px solid rgba(20, 241, 149, 0.2);
-            border-radius: 24px;
-            color: var(--primary);
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-        }
-        
-        .badge-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--primary);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
-        .hero-title {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 2rem;
-        }
-        
-        .gradient-text {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .hero-subtitle {
-            font-size: clamp(1rem, 2vw, 1.3rem);
-            color: var(--gray-light);
-            max-width: 700px;
-            margin: 0 auto 3rem;
-        }
-        
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 4rem;
-            margin-bottom: 3rem;
-        }
-        
-        .stat {
-            text-align: center;
-        }
-        
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 0.25rem;
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-        
-        .hero-cta {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-        }
-        
-        /* Sections */
-        section {
-            padding: 6rem 0;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-        
-        .section-title {
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 800;
-            margin-bottom: 1rem;
-        }
-        
-        .section-subtitle {
-            font-size: 1.2rem;
-            color: var(--gray-light);
-        }
-        
-        /* Top Traders Section */
-        .top-traders {
-            background: var(--dark-2);
-        }
-        
-        .traders-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-bottom: 3rem;
-        }
-        
-        .trader-card {
-            background: linear-gradient(135deg, #1a1a24 0%, #111118 100%);
-            border: 2px solid rgba(20, 241, 149, 0.2);
-            border-radius: 20px;
-            padding: 30px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .trader-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #14F195, #9945FF);
-        }
-        
-        .trader-card:hover {
-            transform: translateY(-8px);
-            border-color: #14F195;
-            box-shadow: 0 20px 40px rgba(20, 241, 149, 0.2);
-        }
-        
-        .trader-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        
-        .trader-avatar {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #14F195, #9945FF);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 35px;
-            flex-shrink: 0;
-        }
-        
-        .trader-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-        }
-        
-        .verified-badge {
-            color: #14F195;
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .performance-bar {
-            margin: 20px 0;
-        }
-        
-        .performance-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-        }
-        
-        .bar-container {
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        
-        .bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #14F195, #9945FF);
-            border-radius: 10px;
-            transition: width 1s ease;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 25px 0;
-        }
-        
-        .trader-stat {
-            background: rgba(10, 10, 15, 0.8);
-            padding: 18px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .stat-label {
-            color: #6b6b7d;
-            font-size: 0.8rem;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .stat-value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #14F195;
-        }
-        
-        .stat-value.negative {
-            color: #ff4c4c;
-        }
-        
-        .follow-btn {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #14F195, #9945FF);
-            color: #0a0a0f;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .follow-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 24px rgba(20, 241, 149, 0.4);
-        }
-        
-        /* Features Section */
-        .features {
-            background: var(--dark);
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-        
-        .feature-card {
-            padding: 2rem;
-            background: var(--dark-3);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            transition: all 0.3s;
-        }
-        
-        .feature-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-        }
-        
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        
-        .feature-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-        }
-        
-        .feature-card p {
-            color: var(--gray-light);
-        }
-        
-        /* How It Works */
-        .how-it-works {
-            background: var(--dark-2);
-        }
-        
-        .steps-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .step {
-            display: grid;
-            grid-template-columns: 60px 1fr 60px;
-            gap: 2rem;
-            align-items: center;
-            padding: 2rem;
-            background: var(--dark-3);
-            border-radius: 16px;
-            margin-bottom: 1rem;
-            transition: all 0.3s;
-        }
-        
-        .step:hover {
-            transform: translateX(8px);
-        }
-        
-        .step-number {
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: var(--dark);
-            font-size: 1.5rem;
-            font-weight: 800;
-            border-radius: 50%;
-        }
-        
-        .step-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .step-content p {
-            color: var(--gray-light);
-        }
-        
-        .step-icon {
-            font-size: 2.5rem;
-        }
-        
-        /* Waitlist Section */
-        .waitlist-section {
-            background: linear-gradient(135deg, rgba(20, 241, 149, 0.1), rgba(153, 69, 255, 0.1));
-        }
-        
-        .waitlist-content {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .waitlist-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .waitlist-text p {
-            font-size: 1.1rem;
-            color: var(--gray-light);
-            margin-bottom: 2rem;
-        }
-        
-        .waitlist-form {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        
-        .waitlist-form input {
-            flex: 1;
-            padding: 1rem;
-            background: var(--dark-3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: var(--white);
-            font-size: 1rem;
-        }
-        
-        .waitlist-form input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        
-        .success-message {
-            display: none;
-            text-align: center;
-            padding: 2rem;
-        }
-        
-        .success-message.active {
-            display: block;
-        }
-        
-        .success-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-        
-        .success-message h3 {
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        /* Footer */
-        .footer {
-            background: var(--dark-2);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 3rem 0 2rem;
-        }
-        
-        .footer-content {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .footer-tagline {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--primary);
-            margin-top: 1rem;
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .footer-copyright {
-            color: var(--gray);
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links, .nav-actions {
-                display: none;
-            }
-            
-            .hero-stats {
-                flex-direction: column;
-                gap: 2rem;
-            }
-            
-            .hero-cta {
-                flex-direction: column;
-            }
-            
-            .waitlist-form {
-                flex-direction: column;
-            }
-            
-            .step {
-                grid-template-columns: 60px 1fr;
-            }
-            
-            .step-icon {
-                display: none;
-            }
-            
-            .traders-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <title>Mirror Sync - AI-Powered Copy Trading on Solana</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
-        <div class="container">
-            <div class="nav-content">
-                <div class="logo">
-                    <span class="logo-icon">🪞</span>
-                    <span class="logo-text">Mirror Sync</span>
-                </div>
-                <div class="nav-links">
-                    <a href="#traders">Top Traders</a>
-                    <a href="#features">Features</a>
-                    <a href="#how-it-works">How It Works</a>
-                    <a href="#waitlist">Waitlist</a>
-                </div>
-                <div class="nav-actions">
-                    <button class="btn-secondary" id="connectWallet">
-                        <span class="wallet-icon">👛</span>
-                        Connect Wallet
-                    </button>
-                    <button class="btn-primary" onclick="scrollToWaitlist()">Join Waitlist</button>
-                </div>
+        <div class="nav-container">
+            <div class="logo">🔄 Mirror Sync</div>
+            <div class="nav-links">
+                <a href="#traders">Top Traders</a>
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#waitlist">Waitlist</a>
+            </div>
+            <div class="nav-buttons">
+                <button id="connectWallet" class="btn-wallet">🦊 Connect Wallet</button>
+                <a href="#waitlist" class="btn-primary">Join Waitlist</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-background">
-            <div class="gradient-orb orb-1"></div>
-            <div class="gradient-orb orb-2"></div>
-            <div class="gradient-orb orb-3"></div>
-        </div>
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <span class="badge-dot"></span>
-                    Built on Solana ⚡
-                </div>
-                <h1 class="hero-title">
-                    Grow Together,<br>
-                    <span class="gradient-text">Rich Together</span>
-                </h1>
-                <p class="hero-subtitle">
-                    The first AI-powered decentralized copy trading platform on Solana.
-                    Follow expert traders automatically. Zero custody risk. $0.00025 fees.
-                </p>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <div class="stat-value">65,000+</div>
-                        <div class="stat-label">TPS on Solana</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">0.1%</div>
-                        <div class="stat-label">Platform Fee</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">AI-Verified</div>
-                        <div class="stat-label">Expert Traders</div>
-                    </div>
-                </div>
-                <div class="hero-cta">
-                    <button class="btn-primary btn-large" onclick="scrollToWaitlist()">
-                        Join Early Access
-                        <span class="btn-arrow">→</span>
-                    </button>
-                    <a href="#how-it-works" class="btn-secondary btn-large">
-                        Learn More
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Top Traders Section -->
-    <section class="top-traders" id="traders">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">🪞 Top Verified Traders</h2>
-                <p class="section-subtitle">AI-Verified Expert Guides • Start Copying in One Click</p>
-            </div>
-            
-            <div class="traders-grid">
-                <!-- Trader 1 -->
-                <div class="trader-card">
-                    <div class="trader-header">
-                        <div class="trader-avatar">🦈</div>
-                        <div class="trader-info">
-                            <h3>CryptoShark</h3>
-                            <div class="verified-badge">
-                                <span>✓</span>
-                                <span>AI Verified • 8 months</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="performance-bar">
-                        <div class="performance-label">
-                            <span style="color: #6b6b7d;">AI Trust Score</span>
-                            <span style="color: #14F195; font-weight: 700;">78/100</span>
-                        </div>
-                        <div class="bar-container">
-                            <div class="bar-fill" style="width: 78%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="stats-grid">
-                        <div class="trader-stat">
-                            <div class="stat-label">Win Rate</div>
-                            <div class="stat-value">78%</div>
-                        </div>
-                        <div class="trader-stat">
-                            <div class="stat-label">6M ROI</div>
-                            <div class="stat-value">+245%</div>
-                        </div>
-                        <div class="trader-stat">
-                            <div class="stat-label">Followers</div>
-                            <div class="stat-value">1,234</div>
-                        </div>
-                        <div class="trader-stat">
-                            <div class="stat-label">Max Drawdown</div>
-                            <div class="stat-value negative">-12%</div>
-                        </div>
-                    </div>
-                    
-                    <button class="follow-btn" onclick="scrollToWaitlist()">
-                        <span>Follow Trader</span>
-                        <span>→</span>
-                    </button>
-                </div>
-                
-                <!-- Trader 2 -->
-                <div class="trader-card">
-                    <div class="trader-header">
-                        <div class="trader-avatar">🚀</div>
-                        <div class="trader-info">
-                            <h3>SolanaWhale</h3>
-                            <div class="verified-badge">
-                                <span>✓</span>
-                                <span>AI Verified • 12 months</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="performance-bar">
-                        <div class="performance-label">
-                            <span style="color: #6b6b7d;">AI Trust Score</span>
-                            <span style="color: #14F195; font-weight: 700;">92/100</span>
-                        </div>
-                        <div class="bar-container">
-                            <div class="bar-fill" style="width: 92%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="stats-grid">
-                        <div class="trader-stat">
-                            <div class="stat-label">Win Rate</div>
-                            <div class="stat-value">85%</div>
-                        </div>
-                        <div class="trader-stat">
-                            <div class="stat-label">6M ROI</div>
-                            <div class="stat-value">+312%</div>
-                        </div>
-                        <div class="trader-stat">
-                            <div class="stat-label">Followers</div>
-                            <div class="stat-value">2,891</div>
-                        </div>
-                        <div class="trader-stat">
-                            <div class="stat-label">Max Drawdown</div>
-                            <div class="stat-value negative">-8%</div>
-                        </div>
-                    </div>
-                    
-                    <button class="follow-btn" onclick="scrollToWaitlist()">
-                        <span>Follow Trader</span>
-                        <span>→</span>
-                    </button>
-                </div>
-                
-                <!-- Trader 3 -->
-                <div class="trader-card">
-                    <div class="trader-header">
-                        <div class="trader-avatar">💎</div>
-                        <div class="trader-info">
-                            <h3>DiamondHands</h3>
-                            <div class="verified-badge">
-                                <span>✓</span>
-                                <span>AI Verified • 10 months</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="performance-bar">
-                        <div class="performance-label">
-                            <span style="color: #6b6b7d;">AI Trust Score</span>
-                            <span style="color: #14F195; font-weight: 700;">81/100</span>
-                        </div>
-                        <div class="bar-container">
-                            <div class="bar-fill" style="width: 81%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="stats-grid">
-                        <div class="trader-stat">
-                            <div class="stat-label">Win Rate</div>
-                            <div class="stat-value">72%</div>
-                        </div>
-                        <div class="trader-stat">
-                            <div class="stat-label">6M ROI</div>
-                            <div class="stat-value">+189%</div>
-                        </div>
-                        <div class="trader-stat">
-                            <div class="stat-label">Followers</div>
-                            <div class="stat-value">987</div>
-                        </div>
-                        <div class="trader-stat">
-                            <div class="stat-label">Max Drawdown</div>
-                            <div class="stat-value negative">-15%</div>
-                        </div>
-                    </div>
-                    
-                    <button class="follow-btn" onclick="scrollToWaitlist()">
-                        <span>Follow Trader</span>
-                        <span>→</span>
-                    </button>
-                </div>
+        <div class="hero-content">
+            <h1 class="hero-title">Grow Together, Rich Together</h1>
+            <p class="hero-subtitle">AI-powered copy trading on Solana. Mirror successful traders automatically.</p>
+            <div class="hero-buttons">
+                <a href="#waitlist" class="btn-large btn-primary">Join Early Access</a>
+                <button id="connectWalletHero" class="btn-large btn-secondary">Connect Wallet</button>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="container">
-            <h2 class="section-title">Why Mirror Sync?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h3>AI-Verified Traders</h3>
-                    <p>Only expert traders with 6+ months proven track record. No fake gurus.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Real-Time Mirroring</h3>
-                    <p>Trades copied in seconds. Powered by Solana's 400ms blocks.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <h3>Non-Custodial</h3>
-                    <p>Your keys, your crypto. We never hold your funds.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💎</div>
-                    <h3>Low Fees</h3>
-                    <p>0.1% platform fee. 1000x cheaper than Ethereum alternatives.</p>
-                </div>
+    <section id="features" class="features">
+        <h2>Why Mirror Sync?</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>AI Verification</h3>
+                <p>Advanced AI verifies trader performance and detects fraud</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Instant Mirroring</h3>
+                <p>Copy trades in real-time on Solana's fast network</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>Risk Management</h3>
+                <p>Smart contracts protect your funds automatically</p>
             </div>
         </div>
     </section>
 
-    <!-- How It Works -->
-    <section class="how-it-works" id="how-it-works">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">How It Works</h2>
-                <p class="section-subtitle">Start copying expert traders in 3 simple steps</p>
+    <!-- Top Traders Section -->
+    <section id="traders" class="traders">
+        <h2>Top Performing Guides</h2>
+        <div class="trader-grid"></div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Connect Wallet</h3>
+                <p>Link your Phantom wallet securely</p>
             </div>
-            <div class="steps-container">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Connect Your Wallet</h3>
-                        <p>Link your Phantom, Solflare, or any Solana wallet. Your funds never leave your custody.</p>
-                    </div>
-                    <div class="step-icon">👛</div>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Choose Expert Traders</h3>
-                        <p>Browse AI-verified "Guides" with proven 6+ month track records.</p>
-                    </div>
-                    <div class="step-icon">🎯</div>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>Auto-Mirror Trades</h3>
-                        <p>Set your allocation and risk parameters. Our smart contracts handle the rest.</p>
-                    </div>
-                    <div class="step-icon">🪞</div>
-                </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Choose a Guide</h3>
+                <p>Browse verified traders and their stats</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Start Mirroring</h3>
+                <p>Automatically copy their trades</p>
             </div>
         </div>
     </section>
 
     <!-- Waitlist Section -->
-    <section class="waitlist-section" id="waitlist">
-        <div class="container">
-            <div class="waitlist-content">
-                <div class="waitlist-text">
-                    <h2>Join the Waitlist</h2>
-                    <p>Be among the first 1,000 users</p>
-                </div>
-                <div class="waitlist-form-container">
-                    <form class="waitlist-form" id="waitlistForm">
-                        <input type="email" id="emailInput" placeholder="Enter your email" required>
-                        <button type="submit" class="btn-primary">Join Waitlist</button>
-                    </form>
-                    <div class="success-message" id="successMessage">
-                        <div class="success-icon">✅</div>
-                        <h3>You're on the list!</h3>
-                        <p>Check your email for confirmation.</p>
-                    </div>
-                </div>
+    <section id="waitlist" class="waitlist">
+        <div class="waitlist-container">
+            <h2>Join the Waitlist</h2>
+            <p>Be among the first 1,000 users</p>
+            
+            <form id="waitlistForm">
+                <input 
+                    type="email" 
+                    id="emailInput" 
+                    placeholder="Enter your email address" 
+                    required
+                />
+                <button type="submit" class="btn-submit">Join Waitlist</button>
+            </form>
+            
+            <div id="successMessage" class="success-message" style="display: none;">
+                <div class="success-icon">✅</div>
+                <h3>You're on the list!</h3>
+                <p>Check your email for confirmation.</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="logo">
-                        <span class="logo-icon">🪞</span>
-                        <span class="logo-text">Mirror Sync</span>
-                    </div>
-                    <p class="footer-tagline">Grow Together, Rich Together</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p class="footer-copyright">© 2025 Mirror Sync. All rights reserved.</p>
+        <div class="footer-content">
+            <div class="logo">🔄 Mirror Sync</div>
+            <p>Grow Together, Rich Together</p>
+            <div class="social-links">
+                <a href="https://github.com/mirrorsyncofficial-ops" target="_blank">GitHub</a>
+                <a href="#">Twitter</a>
+                <a href="#">Discord</a>
             </div>
         </div>
     </footer>
 
-    <script>
-        // Wallet Connection
-        document.getElementById('connectWallet').addEventListener('click', async function() {
-            const isPhantomInstalled = window.solana && window.solana.isPhantom;
-            
-            if (!isPhantomInstalled) {
-                alert('Phantom wallet not detected. Please install it from phantom.app');
-                window.open('https://phantom.app/', '_blank');
-                return;
-            }
-            
-            try {
-                const resp = await window.solana.connect();
-                const publicKey = resp.publicKey.toString();
-                const shortKey = publicKey.slice(0, 4) + '...' + publicKey.slice(-4);
-                
-                this.innerHTML = `<span class="wallet-icon">✅</span> ${shortKey}`;
-                alert('Wallet connected! 🎉');
-            } catch (err) {
-                console.error('Wallet connection failed:', err);
-                alert('Failed to connect wallet. Please try again.');
-            }
-        });
-
-        // Waitlist Form
-        document.getElementById('waitlistForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('emailInput').value;
-            
-            if (!isValidEmail(email)) {
-                alert('Please enter a valid email address');
-                return;
-            }
-            
-            // Save to memory
-            const waitlist = JSON.parse(localStorage.getItem('waitlist') || '[]');
-            waitlist.push({ email, date: new Date().toISOString() });
-            localStorage.setItem('waitlist', JSON.stringify(waitlist));
-            
-            // Show success
-            document.getElementById('waitlistForm').style.display = 'none';
-            document.getElementById('successMessage').classList.add('active');
-            
-            alert('Successfully joined the waitlist! 🎉');
-        });
-
-        function isValidEmail(email) {
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        }
-
-        // Scroll to Waitlist
-        function scrollToWaitlist() {
-            document.getElementById('waitlist').scrollIntoView({ behavior: 'smooth' });
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
