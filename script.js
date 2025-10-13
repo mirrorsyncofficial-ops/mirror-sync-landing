@@ -74,8 +74,8 @@ function initWaitlistForm() {
             submitButton.textContent = 'Joining...';
             
             try {
-                // Send to Google Sheets
-                await fetch('https://script.google.com/macros/s/AKfycbwzmXgvb2vzSUf4USYgoLoS14gFMOrZJs-iMyJ2H7azQgxOz8ZBy_Ud70gJSI5vb8EOTA/exec', {
+                // Send to Google Sheets - UPDATED URL
+                await fetch('https://script.google.com/macros/s/AKfycbxOgkeunlE5dA1XrWq2U5VyNNQCtH7FkjXhO1UPiJbbpkT_FBQSQyeGRGJ4rDkRGKzdOw/exec', {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: {
