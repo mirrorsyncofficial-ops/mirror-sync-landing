@@ -4,26 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mirror Sync - AI-Powered Copy Trading on Solana</title>
-    <meta name="description" content="The first AI-powered decentralized copy trading platform on Solana. Follow expert traders, verified by AI, and grow your portfolio together.">
+    <meta name="description" content="The first AI-powered decentralized copy trading platform on Solana. Non-custodial, transparent, and 1000x cheaper than Ethereum.">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Grant Status Banner -->
     <div class="grant-banner">
-        🎯 <strong>GRANT UNDER REVIEW</strong> - Solana Foundation Ecosystem Support Program
+        <div class="container">
+            <p>🎯 <strong>GRANT UNDER REVIEW</strong> - Solana Foundation Ecosystem Support Program</p>
+        </div>
     </div>
 
     <!-- Header -->
-    <header class="header">
+    <header>
         <div class="container">
-            <div class="logo">
-                <span class="logo-text">Mirror Sync</span>
-            </div>
-            <nav class="nav">
-                <a href="#features">Features</a>
-                <a href="#roadmap">Roadmap</a>
-                <a href="#faq">FAQ</a>
-                <a href="#waitlist" class="cta-button">Join Waitlist</a>
+            <nav>
+                <div class="logo">Mirror Sync</div>
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#contract">Contract</a>
+                    <a href="#roadmap">Roadmap</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="#waitlist" class="cta-button">Join Waitlist</a>
+                </div>
             </nav>
         </div>
     </header>
@@ -32,155 +35,171 @@
     <section class="hero">
         <div class="container">
             <div class="hero-badge">✅ LIVE ON SOLANA DEVNET</div>
-            <h1 class="hero-title">Grow Together,<br>Rich Together</h1>
-            <p class="hero-subtitle">The first AI-powered decentralized copy trading platform on Solana. Follow expert traders, verified by AI, and multiply your profits.</p>
+            <h1>Grow Together, Rich Together</h1>
+            <p class="hero-subtitle">The first AI-powered decentralized copy trading platform on Solana</p>
             
             <div class="hero-stats">
-                <div class="stat-item">
-                    <div class="stat-number">1000x</div>
-                    <div class="stat-label">Cheaper than Ethereum</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">0.1%</div>
-                    <div class="stat-label">Platform Fee</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">90%</div>
+                <div class="stat">
+                    <div class="stat-value">90%</div>
                     <div class="stat-label">Test Coverage</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">$0.00025</div>
+                    <div class="stat-label">Avg Transaction Cost</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">400ms</div>
+                    <div class="stat-label">Block Time</div>
                 </div>
             </div>
 
             <div class="hero-cta">
-                <a href="#waitlist" class="button-primary">Join Waitlist</a>
-                <a href="https://solscan.io/account/5vmm28K6SP6j8R4eBnprxaxHYhQtyqbXe8dbu17R1T3A?cluster=devnet" target="_blank" class="button-secondary">View Smart Contract</a>
+                <a href="#waitlist" class="primary-button">Join Waitlist - Be First 1,000</a>
+                <a href="#contract" class="secondary-button">View Smart Contract →</a>
             </div>
         </div>
     </section>
 
-    <!-- Live Contract Section -->
-    <section class="contract-proof">
+    <!-- Live Contract Proof Section -->
+    <section id="contract" class="contract-section">
         <div class="container">
-            <div class="live-badge">✅ LIVE ON SOLANA DEVNET</div>
-            <h2 class="section-title">Smart Contract Deployed & Operational</h2>
+            <div class="contract-badge">✅ LIVE ON SOLANA DEVNET</div>
+            <h2>Smart Contract Deployed & Operational</h2>
             <p class="section-subtitle">Our production-ready smart contract is live on Solana Devnet with core functionality fully tested.</p>
-            
+
             <div class="contract-stats">
-                <div class="stat-card">
-                    <div class="stat-card-label">TEST COVERAGE</div>
-                    <div class="stat-card-value">90%</div>
-                    <div class="stat-card-detail">9/10 tests passing</div>
+                <div class="contract-stat">
+                    <div class="stat-label">TEST COVERAGE</div>
+                    <div class="stat-number">90%</div>
+                    <div class="stat-detail">9/10 tests passing</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-card-label">GUIDES</div>
-                    <div class="stat-card-value">1</div>
-                    <div class="stat-card-detail">Verified traders</div>
+                <div class="contract-stat">
+                    <div class="stat-label">GUIDES</div>
+                    <div class="stat-number">1</div>
+                    <div class="stat-detail">Verified traders</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-card-label">TRAVELERS</div>
-                    <div class="stat-card-value">1</div>
-                    <div class="stat-card-detail">Active users</div>
+                <div class="contract-stat">
+                    <div class="stat-label">TRAVELERS</div>
+                    <div class="stat-number">1</div>
+                    <div class="stat-detail">Active users</div>
                 </div>
             </div>
 
-            <div class="program-id-card">
-                <div class="program-id-label">📍 PROGRAM ID (VERIFIED)</div>
-                <div class="program-id-value">5vmm28K6SP6j8R4eBnprxaxHYhQtyqbXe8dbu17R1T3A</div>
-                <div class="program-id-actions">
-                    <button onclick="copyProgramId()" class="button-copy">📋 Copy Program ID</button>
-                    <a href="https://solscan.io/account/5vmm28K6SP6j8R4eBnprxaxHYhQtyqbXe8dbu17R1T3A?cluster=devnet" target="_blank" class="button-explorer">🔍 View on Solscan Explorer →</a>
+            <div class="contract-id-box">
+                <div class="contract-id-label">📍 PROGRAM ID (VERIFIED)</div>
+                <div class="contract-id">5vmm28K6SP6j8R4eBnprxaxHYhQtyqbXe8dbu17R1T3A</div>
+                <div class="contract-actions">
+                    <a href="https://solscan.io/account/5vmm28K6SP6j8R4eBnprxaxHYhQtyqbXe8dbu17R1T3A?cluster=devnet" target="_blank" class="primary-button">🔍 View on Solscan Explorer →</a>
+                    <button onclick="copyProgramId()" class="secondary-button">📋 Copy Program ID</button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="features">
+    <section id="features" class="features-section">
         <div class="container">
-            <h2 class="section-title">Why Mirror Sync?</h2>
-            <p class="section-subtitle">Built on Solana for speed, security, and cost-efficiency</p>
-            
+            <h2>Why Mirror Sync?</h2>
+            <p class="section-subtitle">The most advanced copy trading platform built for Solana</p>
+
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">🤖</div>
                     <h3>AI-Verified Guides</h3>
                     <p>Our AI analyzes 6+ months of on-chain trading history to verify expert traders before they can become Guides.</p>
                 </div>
+
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
                     <h3>Real-Time Copying</h3>
-                    <p>Trades execute in milliseconds on Solana. Your portfolio mirrors expert moves instantly.</p>
+                    <p>Mirror trades in real-time with Solana's 400ms block time. No delays, no slippage, no missed opportunities.</p>
                 </div>
+
                 <div class="feature-card">
                     <div class="feature-icon">🔒</div>
                     <h3>Non-Custodial</h3>
-                    <p>Your keys, your crypto. We never hold your funds. Trade directly from your wallet.</p>
+                    <p>Your keys, your crypto. Funds never leave your wallet. Zero custody risk, maximum security.</p>
                 </div>
+
                 <div class="feature-card">
-                    <div class="feature-icon">💰</div>
-                    <h3>Low Fees</h3>
-                    <p>Only 0.1% platform fee + 10% performance fee on profits. 1000x cheaper than Ethereum alternatives.</p>
+                    <div class="feature-icon">💎</div>
+                    <h3>1000x Cheaper</h3>
+                    <p>$0.00025 per transaction vs $50+ on Ethereum. Save 99.9% on fees while trading more efficiently.</p>
                 </div>
+
                 <div class="feature-card">
                     <div class="feature-icon">📊</div>
-                    <h3>Transparent Performance</h3>
-                    <p>See every Guide's verified track record, win rate, and profit history on-chain.</p>
+                    <h3>Transparent Analytics</h3>
+                    <p>Every trade, every profit, every loss - fully transparent and verifiable on-chain. No hidden performance.</p>
                 </div>
+
                 <div class="feature-card">
-                    <div class="feature-icon">🌐</div>
-                    <h3>Decentralized</h3>
-                    <p>Built on Solana blockchain. No central point of failure. Auditable and trustless.</p>
+                    <div class="feature-icon">🎯</div>
+                    <h3>Performance-Based Fees</h3>
+                    <p>Guides only earn 10% of your profits. If you don't make money, they don't make money. Aligned incentives.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Roadmap Section -->
-    <section id="roadmap" class="roadmap">
+    <section id="roadmap" class="roadmap-section">
         <div class="container">
-            <h2 class="section-title">Our Journey</h2>
-            <p class="section-subtitle">From concept to global copy trading platform</p>
-            
+            <h2>Development Roadmap</h2>
+            <p class="section-subtitle">Our journey from concept to mainnet launch</p>
+
             <div class="roadmap-timeline">
                 <div class="roadmap-item completed">
                     <div class="roadmap-marker">✅</div>
                     <div class="roadmap-content">
                         <h3>Q3 2025 - Smart Contract Development</h3>
-                        <p>Developed and deployed core smart contract to Solana Devnet with 90% test coverage.</p>
+                        <p>Built and deployed core smart contract to Solana Devnet with 90% test coverage.</p>
+                        <div class="roadmap-status">COMPLETED</div>
                     </div>
                 </div>
+
                 <div class="roadmap-item completed">
                     <div class="roadmap-marker">✅</div>
                     <div class="roadmap-content">
                         <h3>Q4 2025 - Grant Application</h3>
-                        <p>Submitted grant application to Solana Foundation Ecosystem Support Program. Currently under review.</p>
+                        <p>Submitted grant application to Solana Foundation Ecosystem Support Program.</p>
+                        <div class="roadmap-status">UNDER REVIEW</div>
                     </div>
                 </div>
+
                 <div class="roadmap-item active">
-                    <div class="roadmap-marker">🔄</div>
+                    <div class="roadmap-marker">⏳</div>
                     <div class="roadmap-content">
                         <h3>Q4 2025 - Security Audit</h3>
-                        <p>Professional security audit and final testing before mainnet deployment.</p>
+                        <p>Professional security audit and final contract optimizations before mainnet deployment.</p>
+                        <div class="roadmap-status">IN PROGRESS</div>
                     </div>
                 </div>
+
                 <div class="roadmap-item">
-                    <div class="roadmap-marker">⏳</div>
+                    <div class="roadmap-marker">📅</div>
                     <div class="roadmap-content">
                         <h3>Q1 2026 - Beta Launch</h3>
-                        <p>Launch beta version with first 100 users. Onboard verified Guides and begin real trading.</p>
+                        <p>Mainnet deployment with limited beta access for first 1,000 waitlist members.</p>
+                        <div class="roadmap-status">UPCOMING</div>
                     </div>
                 </div>
+
                 <div class="roadmap-item">
-                    <div class="roadmap-marker">⏳</div>
+                    <div class="roadmap-marker">📅</div>
                     <div class="roadmap-content">
                         <h3>Q2 2026 - Token Launch</h3>
-                        <p>Launch $MSYNC governance token. Token holders vote on platform decisions and share revenue.</p>
+                        <p>$MSYNC token launch with governance and staking features for the community.</p>
+                        <div class="roadmap-status">PLANNED</div>
                     </div>
                 </div>
+
                 <div class="roadmap-item">
-                    <div class="roadmap-marker">⏳</div>
+                    <div class="roadmap-marker">📅</div>
                     <div class="roadmap-content">
                         <h3>Q3 2026 - Mobile App</h3>
-                        <p>Launch iOS and Android apps for trading on the go. Push notifications for Guide trades.</p>
+                        <p>Native iOS and Android apps for trading on the go.</p>
+                        <div class="roadmap-status">PLANNED</div>
                     </div>
                 </div>
             </div>
@@ -188,59 +207,59 @@
     </section>
 
     <!-- FAQ Section -->
-    <section id="faq" class="faq">
+    <section id="faq" class="faq-section">
         <div class="container">
-            <h2 class="section-title">Frequently Asked Questions</h2>
+            <h2>Frequently Asked Questions</h2>
             <p class="section-subtitle">Everything you need to know about Mirror Sync</p>
-            
+
             <div class="faq-list">
                 <div class="faq-item">
                     <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>What is Mirror Sync?</span>
-                        <span class="faq-icon">+</span>
+                        <span>Is Mirror Sync safe? How do I know I won't lose my funds?</span>
+                        <span class="faq-arrow">▼</span>
                     </button>
                     <div class="faq-answer">
-                        <p>Mirror Sync is a decentralized copy trading platform on Solana that lets you automatically follow the trades of verified expert traders (Guides). Our AI verifies each Guide's trading history before they can accept followers.</p>
+                        <p>Mirror Sync is completely non-custodial, meaning your funds NEVER leave your wallet. You maintain full control of your private keys at all times. Our smart contract only has permission to execute trades on your behalf - it cannot withdraw or transfer your funds. Additionally, our contract will undergo a professional security audit before mainnet launch.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>Is my money safe?</span>
-                        <span class="faq-icon">+</span>
+                        <span>How do you verify that Guides are actually good traders?</span>
+                        <span class="faq-arrow">▼</span>
                     </button>
                     <div class="faq-answer">
-                        <p>Yes! Mirror Sync is completely non-custodial. Your funds never leave your wallet. You maintain full control of your private keys and can stop following a Guide at any time.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>How do you verify Guides?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Our AI analyzes at least 6 months of on-chain trading history, including win rate, profit/loss ratio, maximum drawdown, and trading consistency. Only traders who meet our strict criteria can become Guides.</p>
+                        <p>Our AI system analyzes at least 6 months of on-chain trading history before approving any Guide. We look at win rate, risk management, consistency, maximum drawdown, and overall performance. Only traders who meet our strict criteria can register as Guides. All performance data is transparent and verifiable on-chain.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <button class="faq-question" onclick="toggleFaq(this)">
                         <span>What are the fees?</span>
-                        <span class="faq-icon">+</span>
+                        <span class="faq-arrow">▼</span>
                     </button>
                     <div class="faq-answer">
-                        <p>We charge a 0.1% platform fee on each trade plus a 10% performance fee on your profits (only when you make money). Guides also receive a 10% performance fee. This aligns everyone's incentives.</p>
+                        <p>Mirror Sync charges a 0.1% platform fee on each trade (that's $1 per $1,000 traded). Guides earn a 10% performance fee, but ONLY on your profits - if you don't make money, they don't make money. There are no subscription fees, no monthly charges, and no hidden costs. Plus, Solana transaction fees average just $0.00025, making Mirror Sync 1000x cheaper than Ethereum-based alternatives.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>When can I start using Mirror Sync?</span>
-                        <span class="faq-icon">+</span>
+                        <span>Can I stop following a Guide at any time?</span>
+                        <span class="faq-arrow">▼</span>
                     </button>
                     <div class="faq-answer">
-                        <p>We're targeting Q1 2026 for beta launch. Join our waitlist to be among the first 100 users to get early access and exclusive benefits.</p>
+                        <p>Yes! You have complete control. You can pause or stop following any Guide instantly with a single transaction. You can also set custom parameters like maximum trade size, stop-loss limits, and which tokens to trade. You're always in control of your trading strategy.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>When will Mirror Sync launch on mainnet?</span>
+                        <span class="faq-arrow">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We're targeting Q1 2026 for mainnet launch. We're currently completing our security audit and final optimizations. The first 1,000 people on our waitlist will get priority beta access. Join the waitlist now to be among the first to trade!</p>
                     </div>
                 </div>
             </div>
@@ -248,68 +267,81 @@
     </section>
 
     <!-- Waitlist Section -->
-    <section id="waitlist" class="waitlist">
+    <section id="waitlist" class="waitlist-section">
         <div class="container">
-            <div class="waitlist-content">
-                <h2 class="section-title">Be Among the First</h2>
-                <p class="section-subtitle">Join our waitlist and get early access to Mirror Sync when we launch in Q1 2026</p>
-                
-                <form action="https://api.web3forms.com/submit" method="POST" class="waitlist-form">
-                    <input type="hidden" name="access_key" value="2afe745d-68cd-4d0f-857b-dd0f558a26eb">
-                    <input type="hidden" name="subject" value="New Mirror Sync Waitlist Signup">
-                    <input type="hidden" name="from_name" value="Mirror Sync Waitlist">
-                    
-                    <div class="form-group">
-                        <input type="email" name="email" placeholder="Enter your email" required>
-                        <button type="submit" class="button-primary">Join Waitlist</button>
-                    </div>
-                    
-                    <p class="form-note">🔒 We respect your privacy. No spam, ever.</p>
-                </form>
+            <h2>Be Among the First 1,000 Users</h2>
+            <p class="section-subtitle">Join our waitlist for early access to Mirror Sync when we launch on mainnet</p>
 
-                <div class="waitlist-stats">
-                    <div class="waitlist-stat">
-                        <div class="waitlist-stat-number">247+</div>
-                        <div class="waitlist-stat-label">Already on waitlist</div>
-                    </div>
-                    <div class="waitlist-stat">
-                        <div class="waitlist-stat-number">$2.3M</div>
-                        <div class="waitlist-stat-label">Ready to deploy</div>
-                    </div>
+            <form class="waitlist-form" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="2afe745d-68cd-4d0f-857b-dd0f558a26eb">
+                <input type="hidden" name="subject" value="New Mirror Sync Waitlist Signup">
+                <input type="hidden" name="redirect" value="https://mirror-sync-landing.vercel.app/thank-you.html">
+                
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Enter your email address" required>
+                    <button type="submit" class="primary-button">Join Waitlist</button>
+                </div>
+                
+                <p class="form-note">🎁 First 1,000 members get lifetime 50% fee discount</p>
+            </form>
+
+            <div class="waitlist-benefits">
+                <div class="benefit">
+                    <span class="benefit-icon">⚡</span>
+                    <span>Priority beta access</span>
+                </div>
+                <div class="benefit">
+                    <span class="benefit-icon">💎</span>
+                    <span>Lifetime 50% discount</span>
+                </div>
+                <div class="benefit">
+                    <span class="benefit-icon">🎯</span>
+                    <span>Exclusive Guide access</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Mirror Sync</h3>
-                    <p>AI-powered copy trading on Solana</p>
-                    <p class="program-id-footer">Program ID: 5vmm28K6SP6j8R4eBnprxaxHYhQtyqbXe8dbu17R1T3A</p>
+                    <p>AI-powered copy trading on Solana. Non-custodial, transparent, and affordable.</p>
                 </div>
+
                 <div class="footer-section">
                     <h4>Product</h4>
-                    <a href="#features">Features</a>
-                    <a href="#roadmap">Roadmap</a>
-                    <a href="#faq">FAQ</a>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#roadmap">Roadmap</a></li>
+                        <li><a href="/whitepaper.pdf" target="_blank">Whitepaper</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
                 </div>
+
                 <div class="footer-section">
                     <h4>Resources</h4>
-                    <a href="https://solscan.io/account/5vmm28K6SP6j8R4eBnprxaxHYhQtyqbXe8dbu17R1T3A?cluster=devnet" target="_blank">Smart Contract</a>
-                    <a href="/whitepaper.pdf" target="_blank">Whitepaper</a>
+                    <ul>
+                        <li><a href="https://solscan.io/account/5vmm28K6SP6j8R4eBnprxaxHYhQtyqbXe8dbu17R1T3A?cluster=devnet" target="_blank">Smart Contract</a></li>
+                        <li><a href="https://docs.solana.com" target="_blank">Solana Docs</a></li>
+                        <li><a href="#waitlist">Join Waitlist</a></li>
+                    </ul>
                 </div>
+
                 <div class="footer-section">
                     <h4>Connect</h4>
-                    <a href="mailto:mirrorsyncofficial@gmail.com">Email</a>
-                    <a href="https://twitter.com/Mirrorsync_Defi" target="_blank">Twitter</a>
+                    <ul>
+                        <li><a href="https://twitter.com/Mirrorsync_Defi" target="_blank">Twitter</a></li>
+                        <li><a href="mailto:mirrorsyncofficial@gmail.com">Email Us</a></li>
+                    </ul>
                 </div>
             </div>
+
             <div class="footer-bottom">
                 <p>&copy; 2025 Mirror Sync. All rights reserved.</p>
-                <p>Built on Solana 🚀</p>
+                <p class="program-id">Smart Contract: 5vmm28K6SP6j8R4eBnprxaxHYhQtyqbXe8dbu17R1T3A</p>
             </div>
         </div>
     </footer>
