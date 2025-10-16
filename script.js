@@ -66,12 +66,13 @@ document.addEventListener('DOMContentLoaded', function() {
             if (href === '#') return;
             
             e.preventDefault();
+            
             const targetId = href.substring(1);
             const targetElement = document.getElementById(targetId);
             
             if (targetElement) {
-                // Calculate offset for sticky header
-                const headerOffset = 80;
+                // Calculate offset for sticky headers
+                const headerOffset = 140; // Grant banner + header height
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
                 
@@ -82,13 +83,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
+
     // Add animation on scroll
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
-    
+
     const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -97,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, observerOptions);
-    
+
     // Observe all sections
     document.querySelectorAll('section').forEach(section => {
         section.style.opacity = '0';
@@ -107,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Form submission handling (optional - adds better UX)
+// Form submission handling (adds better UX)
 document.addEventListener('DOMContentLoaded', function() {
     const waitlistForm = document.querySelector('.waitlist-form');
     
