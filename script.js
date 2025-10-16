@@ -1,239 +1,134 @@
-// Wait for DOM to load
+// Copy Program ID function
+function copyProgramId() {
+    const programId = '5vmm28K6SP6j8R4eBnprxaxHYhQtyqbXe8dbu17R1T3A';
+    
+    // Use modern clipboard API
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(programId)
+            .then(() => {
+                alert('✅ Program ID copied to clipboard!');
+            })
+            .catch(err => {
+                console.error('Failed to copy:', err);
+                fallbackCopy(programId);
+            });
+    } else {
+        // Fallback for older browsers
+        fallbackCopy(programId);
+    }
+}
+
+// Fallback copy method for older browsers
+function fallbackCopy(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.select();
+    
+    try {
+        document.execCommand('copy');
+        alert('✅ Program ID copied to clipboard!');
+    } catch (err) {
+        alert('❌ Failed to copy. Please copy manually: ' + text);
+    }
+    
+    document.body.removeChild(textArea);
+}
+
+// FAQ Toggle function
+function toggleFaq(button) {
+    const faqItem = button.parentElement;
+    const isActive = faqItem.classList.contains('active');
+    
+    // Close all FAQ items
+    document.querySelectorAll('.faq-item').forEach(item => {
+        item.classList.remove('active');
+    });
+    
+    // Toggle current item (only if it wasn't active)
+    if (!isActive) {
+        faqItem.classList.add('active');
+    }
+}
+
+// Smooth scrolling for anchor links
 document.addEventListener('DOMContentLoaded', function() {
-    initWalletConnection();
-    initWaitlistForm();
-    loadTopTraders();
-    initSmoothScroll();
+    // Get all anchor links
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    
+    anchorLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            // Don't prevent default for links that just use # as placeholder
+            if (href === '#') return;
+            
+            e.preventDefault();
+            
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                // Calculate offset for sticky header
+                const headerOffset = 80;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // Add animation on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all sections
+    document.querySelectorAll('section').forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(20px)';
+        section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(section);
+    });
 });
 
-// Wallet Connection
-function initWalletConnection() {
-    const connectButtons = [
-        document.getElementById('connectWallet'),
-        document.getElementById('connectWalletHero')
-    ];
+// Form submission handling (optional - adds better UX)
+document.addEventListener('DOMContentLoaded', function() {
+    const waitlistForm = document.querySelector('.waitlist-form');
     
-    connectButtons.forEach(button => {
-        if (button) {
-            button.addEventListener('click', async () => {
-                if (window.solana && window.solana.isPhantom) {
-                    try {
-                        const response = await window.solana.connect();
-                        const publicKey = response.publicKey.toString();
-                        
-                        connectButtons.forEach(btn => {
-                            if (btn) {
-                                btn.textContent = publicKey.substring(0, 4) + '...' + publicKey.substring(publicKey.length - 4);
-                                btn.style.background = '#00D084';
-                            }
-                        });
-                        
-                        alert('✅ Wallet connected!\n' + publicKey.substring(0, 8) + '...');
-                        
-                    } catch (err) {
-                        console.error('Wallet connection error:', err);
-                        alert('❌ Failed to connect wallet. Please try again.');
-                    }
-                } else {
-                    if (confirm('Phantom wallet not detected!\n\nWould you like to install it?')) {
-                        window.open('https://phantom.app/', '_blank');
-                    }
-                }
-            });
-        }
-    });
-}
-
-// Waitlist Form - SIMPLIFIED VERSION
-function initWaitlistForm() {
-    const form = document.getElementById('waitlistForm');
-    const emailInput = document.getElementById('emailInput');
-    const successMessage = document.getElementById('successMessage');
-    
-    if (form) {
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const email = emailInput.value.trim();
-            
-            // Validate email
-            if (!isValidEmail(email)) {
-                alert('❌ Please enter a valid email address');
-                return;
-            }
-            
-            // Get wallet
-            const wallet = window.solana?.publicKey?.toString() || 'Not connected';
-            
-            // Disable button
-            const submitButton = form.querySelector('button[type="submit"]');
+    if (waitlistForm) {
+        waitlistForm.addEventListener('submit', function(e) {
+            const submitButton = this.querySelector('button[type="submit"]');
             const originalText = submitButton.textContent;
-            submitButton.disabled = true;
-            submitButton.textContent = 'Joining...';
             
-            try {
-                // Create FormData
-                const formData = new FormData();
-                formData.append('access_key', '2nhxxeg38raxt6');
-                formData.append('email', email);
-                formData.append('wallet', wallet);
-                formData.append('name', 'Mirror Sync User');
-                formData.append('message', `New waitlist signup!\n\nEmail: ${email}\nWallet: ${wallet}\nTimestamp: ${new Date().toLocaleString()}`);
-                
-                // Send to Web3Forms
-                const response = await fetch('https://api.web3forms.com/submit', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const result = await response.json();
-                
-                console.log('Web3Forms Response:', result);
-
-                if (result.success) {
-                    // Success!
-                    emailInput.value = '';
-                    form.style.display = 'none';
-                    successMessage.style.display = 'block';
-                    alert('🎉 Successfully joined the waitlist!\n\nCheck your email for confirmation!');
-                    
-                    // Reset after 3 seconds
-                    setTimeout(() => {
-                        form.style.display = 'flex';
-                        successMessage.style.display = 'none';
-                        submitButton.disabled = false;
-                        submitButton.textContent = originalText;
-                    }, 3000);
-                } else {
-                    // Error from Web3Forms
-                    console.error('Web3Forms Error:', result);
-                    alert('❌ Error: ' + (result.message || 'Something went wrong. Please try again.'));
-                    submitButton.disabled = false;
-                    submitButton.textContent = originalText;
-                }
-                
-            } catch (error) {
-                // Network error
-                console.error('Network Error:', error);
-                alert('❌ Network error. Please check your connection and try again.');
-                submitButton.disabled = false;
+            // Change button text while submitting
+            submitButton.textContent = 'Joining...';
+            submitButton.disabled = true;
+            
+            // Note: Form will actually submit to Web3Forms
+            // This is just for UX feedback
+            
+            // Re-enable after a delay (in case of issues)
+            setTimeout(() => {
                 submitButton.textContent = originalText;
-            }
+                submitButton.disabled = false;
+            }, 3000);
         });
     }
-}
-
-// Email validation
-function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
-// Load Top Traders
-function loadTopTraders() {
-    const traderGrid = document.querySelector('.trader-grid');
-    if (!traderGrid) return;
-    
-    const topTraders = [
-        {
-            name: '🐋 CryptoWhale',
-            wallet: 'A1B2C3...X9Y0Z1',
-            winRate: '87%',
-            totalGains: '+342%',
-            followers: '1,234',
-            trades: '156',
-            verified: true
-        },
-        {
-            name: '👑 SolanaKing',
-            wallet: 'D4E5F6...W2V3U4',
-            winRate: '79%',
-            totalGains: '+298%',
-            followers: '892',
-            trades: '203',
-            verified: true
-        },
-        {
-            name: '💎 DeFiPro',
-            wallet: 'G7H8I9...T5S6R7',
-            winRate: '91%',
-            totalGains: '+456%',
-            followers: '2,103',
-            trades: '89',
-            verified: true
-        }
-    ];
-    
-    traderGrid.innerHTML = '';
-    
-    topTraders.forEach((trader, index) => {
-        const card = document.createElement('div');
-        card.className = 'trader-card';
-        
-        card.innerHTML = `
-            <div class="trader-header">
-                <h3>${trader.name} ${trader.verified ? '✓' : ''}</h3>
-                <span class="trader-rank">#${index + 1}</span>
-            </div>
-            <div class="trader-wallet">
-                <span>Wallet: ${trader.wallet}</span>
-            </div>
-            <div class="trader-stats">
-                <div class="stat">
-                    <span class="stat-label">Win Rate</span>
-                    <span class="stat-value success">${trader.winRate}</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-label">Total Gains</span>
-                    <span class="stat-value gains">${trader.totalGains}</span>
-                </div>
-            </div>
-            <div class="trader-info">
-                <div class="info-item">
-                    <span>👥 ${trader.followers} followers</span>
-                </div>
-                <div class="info-item">
-                    <span>📊 ${trader.trades} trades</span>
-                </div>
-            </div>
-            <button class="mirror-button" onclick="mirrorTrader('${trader.wallet}', '${trader.name}')">
-                🔄 Mirror This Trader
-            </button>
-        `;
-        
-        traderGrid.appendChild(card);
-    });
-}
-
-// Mirror trader action
-function mirrorTrader(wallet, name) {
-    if (window.solana && window.solana.isConnected) {
-        alert(`🎯 You've chosen to mirror ${name}\n\nWallet: ${wallet}\n\n✨ This feature will be available in the beta launch!\n\nYou'll be notified when it's ready.`);
-    } else {
-        if (confirm('⚠️ Please connect your Phantom wallet first!\n\nWould you like to connect now?')) {
-            document.getElementById('connectWallet')?.click();
-        }
-    }
-}
-
-// Smooth Scroll
-function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-}
-
-// Console messages
-console.log('%c🔄 Mirror Sync', 'font-size: 24px; font-weight: bold; color: #667eea;');
-console.log('%cGrow Together, Rich Together 💎', 'font-size: 14px; color: #764ba2;');
-console.log('%cWebsite loaded successfully!', 'color: #00D084;');
-console.log('%cWeb3Forms Access Key: 2nhxxeg38raxt6', 'color: #888;');
+});
