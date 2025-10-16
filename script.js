@@ -66,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (href === '#') return;
             
             e.preventDefault();
-            
             const targetId = href.substring(1);
             const targetElement = document.getElementById(targetId);
             
